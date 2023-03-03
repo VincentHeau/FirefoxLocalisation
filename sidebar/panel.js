@@ -4,7 +4,7 @@ js.src = "../background.js";
 document.body.appendChild(js);
 
 
-var map = L.map('map').setView([2, 3], 13);
+var map = L.map('map').setView([40, 6], 7);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 19,
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
