@@ -2,6 +2,7 @@
 # Extension de géolocalisation pour Firefox
 
 Cette extension permet de géolocaliser des mots dans Firefox en utilisant des API de géolocalisations différentes (l'API de géolocalisation de Google Maps, chatgpt, et PTV
+<br>
 <img src="icons/icon.png" alt="logo" width="100">
 
 
