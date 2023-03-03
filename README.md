@@ -7,7 +7,7 @@ Cette extension permet de géolocaliser des mots dans Firefox en utilisant l'API
 - [Installation](#installation)
 - [Utilisation](#utilisation)
 - [Géolocalisation](#géolocalisation)
-- [Google Maps API](#google-maps-api)
+  - [Google Maps API](#google-maps-api)
   - [API ChatGPT](#api-chatgpt)
   - [PTV Group API](#ptv-group-api)
 - [Auteur](#auteur)
@@ -44,7 +44,7 @@ fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${word}&key=YOU
     const location = data.results[0].geometry.location;
     // Faire quelque chose avec la localisation
   })
-  .catch(error => console.error(error));
+  .catch(error => console.error(error));```
   
 ### PTV Group
 
@@ -76,7 +76,7 @@ fetch(`https://api.ptvgroup.com/geocoding/v1/address?q=${encodeURIComponent(quer
     const location = data.results[0].location;
     console.log(`Latitude: ${location.latitude}, Longitude: ${location.longitude}`);
   })
-  .catch(error => console.error(error));
+  .catch(error => console.error(error));```
 
 
 
