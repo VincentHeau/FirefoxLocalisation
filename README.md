@@ -48,6 +48,50 @@ fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${word}&key=YOU
   
   ```
   
+  
+### ChatGPT
+
+ChatGPT est un modèle de langage qui peut être utilisé pour répondre à des questions ou générer du texte en fonction d'une entrée. Il utilise l'apprentissage automatique pour comprendre le contexte de la question et fournir une réponse appropriée.
+
+#### Forces
+- ChatGPT est capable de répondre à une grande variété de questions, des plus simples aux plus complexes.
+- Il peut être utilisé pour générer du texte, ce qui le rend utile dans des domaines tels que la génération automatique de résumés ou de descriptions de produits.
+- Il est constamment mis à jour et amélioré grâce à l'apprentissage automatique.
+
+#### Faiblesses
+- Les réponses fournies par ChatGPT peuvent parfois manquer de précision ou être inexactes.
+- Il nécessite une connexion à Internet pour fonctionner, ce qui peut être un inconvénient dans certains cas.
+
+L'API ChatGPT peut être interrogée pour obtenir une réponse à une question en utilisant une requête HTTP POST. Voici un exemple de code pour appeler l'API en utilisant JavaScript :
+
+```javascript
+async function getChatGPTAnswer(question) {
+  const response = await fetch("https://api.openai.com/v1/engines/davinci-codex/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer <API_KEY>"
+    },
+    body: JSON.stringify({
+      prompt: `Answer the following question: ${question}`,
+      max_tokens: 1024,
+      n: 1,
+      stop: "\n"
+    })
+  });
+
+  const data = await response.json();
+
+  return data.choices[0].text.trim();
+}
+
+// Utilisation de la fonction pour obtenir une réponse à une question
+const question = "Quelle est la hauteur de la tour Eiffel ?";
+const answer = await getChatGPTAnswer(question);
+console.log(answer); // "La tour Eiffel mesure 324 mètres de hauteur."
+
+```
+
 ### PTV Group
 
 PTV Group est une entreprise spécialisée dans la logistique et les transports, qui propose notamment des services de géocodage. Leurs solutions sont payantes et destinées aux professionnels.
@@ -79,8 +123,7 @@ fetch(`https://api.ptvgroup.com/geocoding/v1/address?q=${encodeURIComponent(quer
     console.log(`Latitude: ${location.latitude}, Longitude: ${location.longitude}`);
   })
   .catch(error => console.error(error));
-  
-  '''
+  ```
 
 
 
