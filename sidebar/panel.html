@@ -5,13 +5,45 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="panel.css"/>
 	<link rel="stylesheet" href="../leaflet/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="../leaflet/leaflet.js"></script>
   </head>
 
 <body>
-totot
-   <div id="map"></div>
-   <div id="content"></div>
+  <div class="alert alert-primary" role="alert">
+    Géolocalisation du mot <i id="mot">France</i> : <br> 
+    <i>Sélectionnez l'API de géocodage en dessous de la carte</i> 
+  </div>
+
+ <div id="API">
+  
+    <div id="map"></div>   
+    
+    <div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">PTV Group</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Google Maps</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Chat GPT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Affichage multiple</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <p id="coords" class="card-text">Coordonnées</p>
+      </div>
+    </div>
+
+ </div>
+  
+  
   <script src="panel.js"></script>
   <script src="../background.js"></script>
   <script src='../jquery.js'></script>

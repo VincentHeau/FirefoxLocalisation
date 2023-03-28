@@ -1,10 +1,7 @@
-
 # Extension de géolocalisation pour Firefox
 
 Cette extension permet de géolocaliser des mots dans Firefox en utilisant des API de géolocalisations différentes (l'API de géolocalisation de Google Maps, chatgpt, et PTV
-<br>
-<img src="icons/icon.png" alt="logo" width="100">
-
+![logo](icons/icon.png)
 
 ## Table des matières
 
@@ -14,7 +11,6 @@ Cette extension permet de géolocaliser des mots dans Firefox en utilisant des A
   - [Google Maps API](#google-maps-api)
   - [API ChatGPT](#api-chatgpt)
   - [PTV Group API](#ptv-group-api)
-- [Ressources utilisées](#ressources-utilisées)
 - [Auteur](#auteur)
 - [Licence](#licence)
 
@@ -130,7 +126,7 @@ fetch(`https://api.ptvgroup.com/geocoding/v1/address?q=${encodeURIComponent(quer
   .catch(error => console.error(error));
   ```
 
-## Ressources utilisées
+
 
 ## Auteur
 
