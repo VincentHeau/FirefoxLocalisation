@@ -1,7 +1,10 @@
 # Extension de géolocalisation pour Firefox
 
-Cette extension permet de géolocaliser des mots dans Firefox en utilisant des API de géolocalisations différentes (l'API de géolocalisation de Google Maps, chatgpt, et PTV
+Cette extension permet de géolocaliser des mots dans Firefox en utilisant l'API gratuite de géolocalisation proposée par l'entreprise PTV.
+Ce tutoriel présente comment installer l'application ainsi que les codes qui permettent d'utiliser les API de géocodage payantes proposées par Google Maps, ou encore ChatGPT.
 ![logo](icons/icon.png)
+
+> ℹ️ Remarque : Une description détaillée du code et du fonctionnement figurent dans le [Rapport.md](./Rapport.md). Pour l'installation, se référer au paragraphe correspondant, ou suivre la vidéo d'installation.
 
 ## Table des matières
 
@@ -32,9 +35,32 @@ Cette extension permet de géolocaliser des mots dans Firefox en utilisant des A
 
 Cette extension utilise trois modes de géolocalisation différents pour obtenir la localisation d'un mot : l'API de Google Maps, l'API de ChatGPT et l'API de PTV Group.
 
+
+### IGN
+
+
+```javascript
+const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}`;
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    if (data.features.length > 0) {
+      // Récupérer les coordonnées géographiques
+      const latitude = data.features[0].geometry.coordinates[1];
+      const longitude = data.features[0].geometry.coordinates[0];
+      console.log(`Latitude : ${latitude} | Longitude : ${longitude}`);
+    } else {
+      console.log("Adresse introuvable");
+    }
+  })
+  .catch(error => console.error(error));
+
+```
+
 ### Google Maps
 
-L'API de Google Maps est l'une des plus populaires pour la géolocalisation. Elle est connue pour sa précision et sa couverture mondiale. Cependant, l'utilisation de l'API est payante au-delà d'un certain nombre de requêtes par jour.
+L'API de Google Maps est l'une des plus populaires pour la géolocalisation. Elle est connue pour sa précision et sa couverture mondiale. Cependant, l'utilisation de l'API est payante au-delà d'un certain nombre de requêtes par jour. Elle nécessite un compte de facturation, et n'a donc pas été mise en place dans le projet. Cependant, les quelques lignes ci-dessous détaillent comment utiliser ce service une fois que l'on a obtenu la clé d'API.
 
 Pour utiliser l'API de Google Maps, il faut d'abord créer une clé API et l'insérer dans le code JavaScript de l'extension. Voici un exemple d'appel à l'API :
 
@@ -52,18 +78,11 @@ fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${word}&key=YOU
   
 ### ChatGPT
 
-ChatGPT est un modèle de langage qui peut être utilisé pour répondre à des questions ou générer du texte en fonction d'une entrée. Il utilise l'apprentissage automatique pour comprendre le contexte de la question et fournir une réponse appropriée.
+ChatGPT est un modèle de langage qui peut être utilisé pour répondre à des questions ou générer du texte en fonction d'une entrée. Il utilise l'apprentissage automatique pour comprendre le contexte de la question et fournir une réponse appropriée. On peut donc l'utiliser pour demander des coordonnées géographiques d'un lieu et traiter ensuite la réponse obtenue pour afficher le marqueur sur la carte.
 
-#### Forces
-- ChatGPT est capable de répondre à une grande variété de questions, des plus simples aux plus complexes.
-- Il peut être utilisé pour générer du texte, ce qui le rend utile dans des domaines tels que la génération automatique de résumés ou de descriptions de produits.
-- Il est constamment mis à jour et amélioré grâce à l'apprentissage automatique.
-
-#### Faiblesses
-- Les réponses fournies par ChatGPT peuvent parfois manquer de précision ou être inexactes.
-- Il nécessite une connexion à Internet pour fonctionner, ce qui peut être un inconvénient dans certains cas.
 
 L'API ChatGPT peut être interrogée pour obtenir une réponse à une question en utilisant une requête HTTP POST. Voici un exemple de code pour appeler l'API en utilisant JavaScript :
+Il est nécessaire de payer pour avoir accès à une clé d'API. Elle est proposée à 0.002$ pour 1000 tokens.
 
 ```javascript
 async function getChatGPTAnswer(question) {
@@ -95,18 +114,17 @@ console.log(answer); // "La tour Eiffel mesure 324 mètres de hauteur."
 
 ### PTV Group
 
-PTV Group est une entreprise spécialisée dans la logistique et les transports, qui propose notamment des services de géocodage. Leurs solutions sont payantes et destinées aux professionnels.
+PTV Group est une entreprise spécialisée dans la logistique et les transports, qui propose notamment des services de géocodage.
 
 #### Forces
 
 - Précision élevée pour les adresses européennes.
 - Possibilité de rechercher des adresses en utilisant des informations supplémentaires telles que le code postal, la ville, le pays, etc.
 - Disponibilité d'informations de trafic en temps réel pour optimiser les itinéraires.
+- Possibilité d'utiliser l'API gratuite pour un nombre limité de requêtes.
 
 #### Faiblesses
 
-- Solution payante.
-- Couverture géographique limitée à l'Europe.
 - Les adresses hors d'Europe peuvent être moins précises.
 
 #### Exemple d'appel à l'API

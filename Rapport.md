@@ -3,7 +3,7 @@ Vincent Heau
 29 mars 2023
 
 ## Introduction
-Le module complémentaire "FirefoxLocalisation" permet d'ouvrir un panneau latéral avec une carte. Lorsque l'on clique sur un mot d'un article, les différents services de géocodage sont appelés pour afficher le résultat sur la carte. On l'utilise pour trouver un endroit inconnu d'un article du Monde par exemple.
+Le module complémentaire "FirefoxLocalisation" permet d'ouvrir un panneau latéral avec une carte. Lorsque l'on clique sur un mot d'un article, un service de géocodage est appelé pour afficher le résultat sur la carte. On l'utilise pour trouver un endroit inconnu d'un article du Monde par exemple.
 
 ## 1. Comment fonctionne une extension Firefox
 ### 1.1 Description des fichiers
@@ -14,7 +14,7 @@ Une extension Firefox est composée de plusieurs fichiers :
 
 Dans le cadre de ce projet, l'affichage d'une carte dans la page a orienté le développement vers un panneau latéral (en anglais "sidepar") qui s'affiche lorsque module est activé et que l'utilisateur décide de géolocaliser un mot. 
 Le code suivant dans le fichier `manifest.json`permet aussi faire apparaître le panneau avec la commande **Ctrl+Shift+Y**
-"""
+```javascript
 "commands": {
     "_execute_sidebar_action": {
       "suggested_key": {
@@ -22,7 +22,7 @@ Le code suivant dans le fichier `manifest.json`permet aussi faire apparaître le
       }
     }
   }
-"""
+```
 Ce panneau latéral est codé comme une page html, css et javascript dans le dossier `sidebar` du code.
 
 
@@ -42,7 +42,9 @@ Une fois le module chargé, un panneau latéral apparaît alors sur la page. Cel
 ![fonctionnement](icons/fonctionnement.png)
 
 ### 2.2 Géocodage
-Le géocodage est le processus de transformation d'une adresse ou d'un nom de lieu en coordonnées géographiques (latitude et longitude). Dans le cas de l'extension "OpenMap", les différents services de géocodage (tels que Google Maps, OpenStreetMap, etc.) sont appelés lorsque l'utilisateur clique sur un mot d'un article. Le résultat est ensuite affiché sur la carte dans le panneau latéral.
+Le géocodage est le processus de transformation d'une adresse ou d'un nom de lieu en coordonnées géographiques (latitude et longitude). Dans le cas de l'extension "OpenMap", les différents services de géocodage (tels que Google Maps, OpenStreetMap, etc.) sont appelés lorsque l'utilisateur clique sur un mot d'un article. Le résultat est ensuite affiché sur la carte dans le panneau latéral. Le plugin actuel ne fonctionne qu'avec le géocodage PTVGroup, les autres services étant payants.
+> ℹ️ Remarque : On peut retrouver le code des différents géocodage dans le [README.md](./README.md).
+
 
 ### 2.3 Améliorations possibles
 Bien que l'extension fonctionne bien dans son ensemble, il reste possible d'apporter des améliorations. Par exemple, on pourrait ajouter une fonctionnalité de recherche pour permettre à l'utilisateur de chercher un lieu directement depuis le panneau latéral. On pourrait également ajouter des options pour personnaliser l'apparence de la carte ou pour choisir le service de géocodage à utiliser.
@@ -52,4 +54,4 @@ Bien que l'extension fonctionne bien dans son ensemble, il reste possible d'appo
 Afin de faciliter l'installation de l'extension, nous avons créé une vidéo explicative qui montre les étapes à suivre pour installer et utiliser l'extension. Cette vidéo est disponible sur YouTube à l'adresse suivante : [lien vers la vidéo](https://www.youtube.com/watch?v=XXXXXXXXXXX).
 
 ### 3.2 Readme.md
-Nous avons également créé un fichier `README.md` qui contient des informations détaillées sur l'extension, les fonctionnalités qu'elle propose, les raccourcis clavier disponibles, etc. Ce fichier est disponible sur GitHub à l'adresse suivante : [lien vers le fichier README.md](https://github.com/XXXXXXXXXX/extension-openmap/blob/master/README.md).
+Nous avons également créé un fichier `README.md` qui contient des informations détaillées sur l'extension, les fonctionnalités qu'elle propose, les raccourcis clavier disponibles, etc. Ce fichier est disponible sur GitHub à l'adresse suivante : [lien vers le fichier README.md](./README.md).

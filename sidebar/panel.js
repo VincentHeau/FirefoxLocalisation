@@ -6,10 +6,12 @@ document.body.appendChild(js);
 
 // Carte par défaut - Leaflet
 var map = L.map('map').setView([40, 6], 7);
-		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			maxZoom: 19,
-			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-		}).addTo(map);
+
+var tile = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+})
+tile.addTo(map);
 
 
 function createMenuItem(engines) {
@@ -35,63 +37,39 @@ browser.menus.onClicked.addListener((info, tab) => {
   $( "#mot" ).html(info.selectionText);
 	
   /* Partie 1 - Avec PTV */
-	var str = "https://api.myptv.com/geocoding/v1/locations/by-text?searchText="+info.selectionText+"&apiKey=RVVfNzkzZWNlYjliYWU3NGY5Y2E2MGYyMjA2ODYxNDAxNzY6YTg1ZjFkMjYtMDk2MS00MDc2LWJmMzYtOWQ2NDM1NGE5OWFk"
-	fetch(str)
+	var str_PTV = "https://api.myptv.com/geocoding/v1/locations/by-text?searchText="+info.selectionText+"&apiKey=RVVfNzkzZWNlYjliYWU3NGY5Y2E2MGYyMjA2ODYxNDAxNzY6YTg1ZjFkMjYtMDk2MS00MDc2LWJmMzYtOWQ2NDM1NGE5OWFk"
+	fetch(str_PTV)
 	.then(result => result.json())
 	.then(result => {
 		console.log(result);
 	  var coords = result["locations"][0]["referencePosition"];
 	  var lat = coords.latitude;
 	  var lng = coords.longitude;
-	  $( "#coords" ).html("Latitude "+lat+"  |  Longitude "+lng);
-	  map.setView([lat, lng], 10);
-
-    // Ajout du marqueur PTV
-    var marker_PTV = L.marker([lat, lng], {
-      icon: greenIcon,
-      title: "Géocodage PTV"
+	  $( "#coords" ).html("Lat "+Math.round(1000*lat)/1000+" | Lng "+Math.round(1000*lng)/1000);
+	  map.setView([lat, lng], 9);
+    
+    // Nettoyage des marqueurs
+    map.eachLayer((layer) => {
+      console.log(layer);
+      layer.remove();
+      tile.addTo(map);
     });
+    // Ajout du marqueur PTV
+    var marker_PTV = L.circle([lat, lng], {
+      title: "Géocodage PTV",
+      color:'red',
+      fillColor: 'red',
+      fillOpacity: 0.2,
+      radius: 20000
+    });
+    
     marker_PTV.addTo(map);
+    /* Gestion des Boutons */
 
 	});
 
-  /* Partie 2 - Avec PTV */
-	
 });
 
 
-// let myWindowId;
-// const contentBox = document.querySelector("#content");
+/* Gestion des Boutons */
 
-
-
-// window.addEventListener("mouseover", () => {
-//   contentBox.setAttribute("contenteditable", true);
-// });
-
-
-// window.addEventListener("mouseout", () => {
-//   contentBox.setAttribute("contenteditable", false);
-//   browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
-//     let contentToStore = {};
-//     contentToStore[tabs[0].url] = contentBox.textContent;
-//     browser.storage.local.set(contentToStore);
-//   });
-// });
-
-
-// function updateContent() {
-//   browser.tabs.query({windowId: myWindowId, active: true})
-//     .then((tabs) => {
-//       return browser.storage.local.get(tabs[0].url);
-//     })
-//     .then((storedInfo) => {
-//       contentBox.textContent = storedInfo[Object.keys(storedInfo)[0]];
-//     });
-// }
-
-
-// browser.windows.getCurrent({populate: true}).then((windowInfo) => {
-//   myWindowId = windowInfo.id;
-//   updateContent();
-// });
