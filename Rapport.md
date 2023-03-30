@@ -45,8 +45,45 @@ Une fois le module chargé, un panneau latéral apparaît alors sur la page. Cel
 Le géocodage est le processus de transformation d'une adresse ou d'un nom de lieu en coordonnées géographiques (latitude et longitude). Dans le cas de l'extension "OpenMap", les différents services de géocodage (tels que Google Maps, OpenStreetMap, etc.) sont appelés lorsque l'utilisateur clique sur un mot d'un article. Le résultat est ensuite affiché sur la carte dans le panneau latéral. Le plugin actuel ne fonctionne qu'avec le géocodage PTVGroup, les autres services étant payants.
 > ℹ️ Remarque : On peut retrouver le code des différents géocodage dans le [README.md](./README.md).
 
+### 2.3 Récupération du mot sélectionné dans l'url
+Lorsque l'on clique, sur un  mot à géolocaliser, le fichier `background.js` se lance. Il faut réussir à "faire passer" le mot sélectionner vers le fichier `panel.js` qui gère le géocodage et la construction de la carte. En effet, on ne pas tout faire dans `background.js` car ce dernier n'est associé à aucune page html.
 
-### 2.3 Améliorations possibles
+Pour ce faire, j'ai effectué la manipulation suivante :
+Dans le fichier `background.js`, on peut utiliser la méthode browser.sidebarAction.setPanel() pour ouvrir la sidebar et passer des paramètres dans l'URL de la sidebar à l'aide du code suivant :
+```javascript
+// Récupérer le texte sélectionné
+var selectionText = "";
+browser.tabs.executeScript({code: "window.getSelection().toString();"}).then((result) => {
+  selectionText = result[0];
+  
+  // Stocker le texte sélectionné à passer en paramètre
+  var data = {
+    selection: selectionText
+  };
+  browser.storage.local.set({data: data});
+  
+  // Ouvrir la sidebar et passer les données en paramètre
+  browser.sidebarAction.setPanel({panel: "sidebar/panel.html?data=" + encodeURIComponent(JSON.stringify(data))});
+});
+
+```
+Dans ce code, la méthode executeScript() de l'API browser.tabs permet d'exécuter du code JavaScript dans le contexte de la page active. Ensuite, le code window.getSelection().toString() permet de récupérer le texte sélectionné et de stocker le résultat dans une variable selectionText.
+
+Ensuite, le texte sélectionné est passé dans un objet data avec la méthode set() de l'API browser.storage.local en utilisant la clé "data".
+
+Enfin, c'est avec setPanel() de l'API browser.sidebarAction qu'il est possible d'ouvrir la sidebar et de passer les données en paramètre. Les données passent sous forme de chaîne de requête dans l'URL de la sidebar en utilisant la méthode encodeURIComponent() pour éviter les erreurs de formatage.
+
+
+Dans le fichier panel.js associé à la sidebar, on récupère les données ainsi avec URLSearchParams
+```javascript
+// Récupérer les données passées en paramètre
+var urlParams = new URLSearchParams(window.location.search);
+var myData = JSON.parse(decodeURIComponent(urlParams.get("data")));
+
+```
+Avec un bloc try/catch, on peut aussi éviter les erreurs lorsque aucun mot n'est placé dans l'URL.
+
+### 2.4 Améliorations possibles
 Bien que l'extension fonctionne bien dans son ensemble, il reste possible d'apporter des améliorations. Par exemple, on pourrait ajouter une fonctionnalité de recherche pour permettre à l'utilisateur de chercher un lieu directement depuis le panneau latéral. On pourrait également ajouter des options pour personnaliser l'apparence de la carte ou pour choisir le service de géocodage à utiliser.
 
 ## 3. Ressources et éléments produits
