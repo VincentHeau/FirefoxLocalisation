@@ -2,7 +2,9 @@
 
 Cette extension permet de géolocaliser des mots dans Firefox en utilisant l'API gratuite de géolocalisation proposée par l'entreprise PTV.
 Ce tutoriel présente comment installer l'application ainsi que les codes qui permettent d'utiliser les API de géocodage payantes proposées par Google Maps, ou encore ChatGPT.
-![logo](icons/iconv1.png)
+<p align="center">
+  <img src="icons/iconv1.svg" width="200" height="200" alt="Iconv1 Logo">
+</p>
 
 > ℹ️ Remarque : Une description détaillée du code et du fonctionnement figurent dans le [Rapport.md](./Rapport.md). Pour l'installation, se référer au paragraphe correspondant, ou suivre la vidéo d'installation.
 
