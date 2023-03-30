@@ -6,7 +6,7 @@ Ce tutoriel présente comment installer l'application ainsi que les codes qui pe
   <img src="icons/iconv1.svg" width="200" height="200" alt="Iconv1 Logo">
 </p>
 
-> ℹ️ Remarque : Une description détaillée du code et du fonctionnement figurent dans le [Rapport.md](./Rapport.md). Pour l'installation, se référer au paragraphe correspondant, ou suivre la vidéo d'installation.
+> ℹ️ Remarque : Une description détaillée du code et du fonctionnement figurent dans le [Rapport.md](./Rapport.md). Pour l'installation, se référer au paragraphe correspondant, ou suivre la [vidéo d'installation](./video_priseenmain.webm).
 
 ## Table des matières
 
