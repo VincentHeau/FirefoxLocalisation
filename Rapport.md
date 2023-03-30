@@ -40,6 +40,7 @@ Voici en image les différents étapes pour installer et se servir du plugin:
 
 Une fois le module chargé, un panneau latéral apparaît alors sur la page. Celui-ci peut être fermé si besoin. Une fois sur un article du monde, un clic droit sur un mot permet de faire fonctionner le plugin.
 ![fonctionnement](icons/fonctionnement.png)
+![fonctionnementbis](icons/appli2.png)
 
 ### 2.2 Géocodage
 Le géocodage est le processus de transformation d'une adresse ou d'un nom de lieu en coordonnées géographiques (latitude et longitude). Dans le cas de l'extension "OpenMap", les différents services de géocodage (tels que Google Maps, OpenStreetMap, etc.) sont appelés lorsque l'utilisateur clique sur un mot d'un article. Le résultat est ensuite affiché sur la carte dans le panneau latéral. Le plugin actuel ne fonctionne qu'avec le géocodage PTVGroup, les autres services étant payants.
