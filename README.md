@@ -31,7 +31,7 @@ Ce tutoriel présente comment installer l'application ainsi que les codes qui pe
 
 1. Sélectionner un mot dans une page web.
 2. Clic droit sur le mot sélectionné et sélectionner "Géolocaliser le mot" dans le menu.
-3. Une nouvelle fenêtre s'ouvrira affichant la carte Google Maps avec l'emplacement du mot géolocalisé.
+3. Une nouvelle fenêtre s'ouvrira affichant la carte leaflet avec l'emplacement du mot géolocalisé.
 
 ## Géolocalisation
 
