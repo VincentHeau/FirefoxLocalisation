@@ -24,9 +24,10 @@ Ce tutoriel présente comment installer l'application ainsi que les codes qui pe
 
 1. Télécharger l'extension en cliquant sur le bouton "Télécharger l'extension" ci-dessus.
 2. Ouvrir Firefox et accéder au menu des modules complémentaires.
-3. Cliquer sur l'icône d'engrenage (Paramètres) en haut à droite et sélectionner "Installer un module depuis un fichier".
-4. Sélectionner le fichier téléchargé dans l'étape 1.
-5. Redémarrer Firefox.
+3. Cliquer sur l'icône d'engrenage (Paramètres) en haut à droite et sélectionner "Déboguer des modules".
+4. Ensuite cliquez sur "Charger un module complémentaire temporaire"
+5. Sélectionner le fichier téléchargé dans l'étape 1. (Charger le fichier manifest.json)
+6. Le module est prêt à l'installation
 
 ## Utilisation
 
@@ -36,12 +37,12 @@ Ce tutoriel présente comment installer l'application ainsi que les codes qui pe
 
 ## Géolocalisation
 
-Cette extension utilise trois modes de géolocalisation différents pour obtenir la localisation d'un mot : l'API de Google Maps, l'API de ChatGPT et l'API de PTV Group.
-
+Cette extension doit à terme pouvoir utiliser trois modes de géolocalisation différents pour obtenir la localisation d'un mot : l'API de Google Maps, l'API de ChatGPT et l'API de PTV Group.
+Pour le moment, seul un géolocalisation limitée mais gratuite proposée par PTV est proposée. Cependant, voici le code de quelques autres services de géolocalisation.
 
 ### IGN
 
-
+Elle n'est valable qu'en France et n'est donc pas implémentée ici :
 ```javascript
 const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}`;
 
@@ -129,6 +130,7 @@ PTV Group est une entreprise spécialisée dans la logistique et les transports,
 #### Faiblesses
 
 - Les adresses hors d'Europe peuvent être moins précises.
+- Gros problème de géolocalisation d'adresses "évidentes"
 
 #### Exemple d'appel à l'API
 
@@ -146,7 +148,6 @@ fetch(`https://api.ptvgroup.com/geocoding/v1/address?q=${encodeURIComponent(quer
   })
   .catch(error => console.error(error));
   ```
-
 
 
 ## Auteur
