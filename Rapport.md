@@ -93,3 +93,5 @@ Afin de faciliter l'installation de l'extension, nous avons créé une vidéo ex
 
 ### 3.2 Readme.md
 Nous avons également créé un fichier `README.md` qui contient des informations détaillées sur l'extension, les fonctionnalités qu'elle propose, les raccourcis clavier disponibles, etc. Ce fichier est disponible sur GitHub à l'adresse suivante : [lien vers le fichier README.md](./README.md).
+
+
